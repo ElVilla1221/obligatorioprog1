@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<!--Obligatorio de Dante Puerto (360160) y Lucas Villamil (352138)-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/estilos.css">
+    <script src="JS/clases.js"></script>
+    <script src="JS/funciones.js"></script>
+    <title>Sitio de corredores</title>
+</head>
+<body>
+    <header>    
+        <h2 id="sitiodecorredores">Sitio de corredores</h2>
+        <img src="IMG/imagenobligatorio.png" width="375" height="150" alt="Pierna de persona corriendo, con titulo 'Corredores de Uruguay' " class="imgInicio">
+    </header>
+    <nav>
+        <input type="button" value="Datos" id="idDatos"> 
+        <input type="button" value="Estadísticas" id="idEstadisticas">
+    </nav>
+    <section id="seccionDatos">
+        <h3>Datos</h3>
+        <article>
+            <h4>Carreras</h4>
+            <form id="idFormCarreras" action="#" method="get">        
+                <label for="idNombreCarrera" class="alinear">Nombre:</label>
+                <input type="text" name="nomCarrera" id="idNombreCarrera" required>
+                <label for="idDepartamentoCombo" class="alinear">Departamento:</label>
+                <select name="departamentoCarrera" id="idDepartamentoCombo">
+                    <option value="1">Montevideo</option>
+                    <option value="2">Canelones</option>
+                    <option value="3">Maldonado</option>
+                    <option value="4">Rocha</option>
+                    <option value="5">Treinta y Tres</option>
+                    <option value="6">Cerro Largo</option>
+                    <option value="7">Rivera</option>
+                    <option value="8">Artigas</option>
+                    <option value="9">Salto</option>
+                    <option value="10">Paysandú</option>
+                    <option value="11">Río Negro</option>
+                    <option value="12">Soriano</option>
+                    <option value="13">Colonia</option>
+                    <option value="14">San José</option>
+                    <option value="15">Flores</option>
+                    <option value="16">Florida</option>
+                    <option value="17">Lavalleja</option>
+                    <option value="18">Durazno</option>
+                    <option value="19">Tacuarembó</option>
+                </select>
+                <label for="idFecha" class="alinear">Fecha:</label>
+                <input type="date" name="fecha" id="idFecha" required>
+                <label for="idIngresarCupo" class="alinear">Cupo:</label>
+                <input type="number" name="cupo" id="idIngresarCupo" max="1000" min="1" value="30" required>
+                <br>
+                <input type="button" value="Agregar Carrera" id="idBotonAgregarCarrera">
+            </form>
+        </article>
+        <article>
+            <h4>Patrocinadores</h4>
+            <form id="formPatrocindores" action="#" method="get">
+                <label for="idNombrePatrocinador" class="alinear">Nombre:</label>
+                <input type="text" name="nomPatrocinador" id="idNombrePatrocinador" required>
+                <label for="idPatrocinadorCombo" class="alinear">Rubro:</label>
+                <select name="rubroPatrocindor" id="idPatrocinadorCombo">
+                    <option value="Alimenticio">Alimenticio</option>
+                    <option value="Banco">Banco</option>
+                    <option value="Bebidas">Bebidas</option>
+                    <option value="Farmacia">Farmacia</option>
+                    <option value="Ropa deportiva">Ropa deportiva</option>
+                    <option value="Estatal">Estatal</option>
+                    <option value="General">General</option>
+                </select>
+                <label for="idListaCarreras" class="alinear">Carreras:</label>
+                <select name="listaCarreras" id="idListaCarreras" class="comboAnchos" multiple size="4"></select>
+                <br>
+                <input type="button" value="Agregar/Actualizar Patrocinador">
+            </form>
+        </article>
+        <article>
+            <h4>Corredores</h4>
+            <form id="idFormCorredores" action="#" method="get">
+                <label for="idNombreCorredor" class="alinear">Nombre:</label>
+                <input type="text" name="nomCorredor" id="idNombreCorredor" required>
+                <label for="idEdadCorredor" class="alinear">Edad:</label>
+                <input type="number" name="edadCorredor" id="idEdadCorredor" min="18" required>
+                <label for="idCedulaCorredor" class="alinear">Cédula:</label>
+                <input type="text" name="cedCorredor" id="idCedulaCorredor" required>
+                <label for="idVencFichaMedica" class="alinear">Fecha de vencimiento de ficha médica:</label>
+                <input type="date" name="vencFichaMed" id="idVencFichaMedica" required>
+                <br>
+                <label>Tipo de corredor:</label>
+                <input type="radio" name="tipodeportista" id="idElite">
+                <label for="idElite">Deportista de elite</label>
+                <input type="radio" name="tipodeportista" id="idComun" checked>
+                <label for="idComun">Deportista común</label>
+                <br>
+                <input type="button" value="Agregar Corredor">
+            </form>
+        </article>
+        <article>
+            <h4>Inscripciones</h4>
+            <form id="formInscripciones" action="#" method="get">
+                <label for="idCorredoresAInscribir" class="alinear">Corredores:</label>
+                <select name="corredorAInscribir" class="comboAnchos" id="idCorredoresAInscribir"></select>
+                <label for="idCarrerasInscribir" class="alinear">Carreras:</label>
+                <select name="carrerasInscr" class="comboAnchos" id="idCarrerasInscribir"></select>
+                <br>
+                <input type="button" value="Inscribir">
+            </form>
+        </article>
+    </section>
+    <section id="seccionEstadisticas">
+        <h3>Estadísticas</h3>
+        <article>
+        <h4>Datos generales</h4>
+                <p>Promedio de inscriptos por carrera:<span id="idPromedioInscriptos"> sin datos</span></p>
+                    <p>Carrera/s con más inscriptos:</p>
+                <ul id="idCarreMasInscriptos">
+                    <li>sin datos</li>
+                </ul>  
+                    <p>Carreras sin inscriptos por fecha:</p>
+                <ul id="idCarreSinInscriptosPorFecha">
+                    <li>sin datos</li>
+                </ul>
+                <p>Porcentaje de corredores de élite: <span id="idPorcentajeElite"> sin datos</span></p>
+            </article>
+            <article>
+            <h4>Consulta inscriptos</h4>
+            <label for="idNombreCarrera" class="alinear">Carrera:</label>
+            <select name="numeroCarrera" class="comboAnchos" id="idConsultaNombreCarrera"></select>
+            <br>
+            <label>Ordenar por:</label>
+            <input type="radio" name="ordenarCarrera" id="idOrdenarNombre">
+            <label for="idOrdenarNombre">Nombre</label>
+            <input type="radio" name="ordenarCarrera" id="idOrdenarNumero" checked>
+            <label for="idOrdenarNumero">Número</label>
+
+        <table id="idTablaInscriptos">
+            <caption>Inscriptos</caption>
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Cédula</th>
+                    <th>Ficha Médica</th>
+                    <th>Número</th>
+                </tr>
+            </thead>
+            <tbody id="idBodyTablaInscriptos"></tbody>
+        </table>
+    </article>
+    <article>
+        <h4>Visualizar Mapa:</h4>
+        <input type="radio" name="mapaCarrera" id="idMapaCarrera" checked>
+        <label for="idMapaCarrera">Por Carreras</label>
+        <input type="radio" name="mapaCarrera" id="idMapaInscripciones">
+        <label  for="idMapaInscripciones">Por Inscripciones</label>
+        <div class="espacio"></div>
+    </article>
+    </section>
+    <footer>
+        <p>Programación 1 - Obligatorio 1er semestre 2025 - Autores:</p>
+        <p>Grupo M1D - Dante Puerto - 360160  <a href="https://www.ort.edu.uy" target="_blank">Link</a></p>
+        <p>Grupo M1D - Lucas Villamil - 352138  <a href="https://www.ort.edu.uy" target="_blank">Link</a></p>
+    </footer>
+</body>
+</html>

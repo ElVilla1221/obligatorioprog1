@@ -1,0 +1,47 @@
+/*Obligatorio de Dante Puerto (360160) y Lucas Villamil (352138)*/ 
+#sitiodecorredores{
+    text-align: center;
+}
+.imgInicio {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+section {
+    margin-top: 12px;
+    border-radius: 5px;
+    background: rgb(144, 238, 144); 
+    padding: 8px 20px 20px;
+}
+article {
+    margin-bottom: 7px;
+    border-radius: 8px;
+    background-color: rgb(0, 255, 115);
+    padding: 7px 10px 10px;
+}
+.alinear {
+  display: block;
+  text-align: left;
+}
+.comboAnchos{
+    width: 5%;
+}
+footer {
+    margin-top: 12px;
+    background:rgb(223, 241, 152); 
+    border-radius: 10px;
+    padding:10px; 
+    text-align: center;
+}
+#idTablaInscriptos{
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+#idTablaInscriptos,th,td{
+    border: 1px solid black;
+}
+.espacio{
+    height: 400px;
+}
+
+    
