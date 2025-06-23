@@ -54,6 +54,8 @@ function agregarCarrera(){
 
 function actualizar(){
     cargarCarrerasenCombo();
+    cargarCarrerasenCombo2();
+    cargarCarrerasenCombo3();
 }
 
 function cargarCarrerasenCombo(){
@@ -66,5 +68,26 @@ function cargarCarrerasenCombo(){
         nodoC.appendChild(nodoTextoC);
         combito.appendChild(nodoC);
     }
-
+}
+function cargarCarrerasenCombo2(){
+    let combito = document.getElementById("idCarrerasInscribir");
+    combito.innerHTML = "";
+    let listaCarreras = sistema.darListaCarreras();
+    for (elem of listaCarreras){
+        let nodoC = document.createElement("option");
+        let nodoTextoC = document.createTextNode(elem.nombre);
+        nodoC.appendChild(nodoTextoC);
+        combito.appendChild(nodoC);
+    }
+}
+function cargarCarrerasenCombo3(){
+    let combito = document.getElementById("idConsultaNombreCarrera");
+    combito.innerHTML = "";
+    let listaCarreras = sistema.darListaCarreras();
+    for (elem of listaCarreras){
+        let nodoC = document.createElement("option");
+        let nodoTextoC = document.createTextNode(elem.nombre);
+        nodoC.appendChild(nodoTextoC);
+        combito.appendChild(nodoC);
+    }
 }
