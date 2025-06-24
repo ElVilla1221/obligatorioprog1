@@ -11,7 +11,7 @@ function inicio(){
     document.getElementById("idEstadisticas").addEventListener("click",mostrarEstadisticas);
     document.getElementById("idBotonAgregarCarrera").addEventListener("click", agregarCarrera);
     document.getElementById("idBotonAgregarPatrocinador").addEventListener("click",agregarPatrocinador);
-    actualizar();
+    document.getElementById("idBotonAgregarCorredor").addEventListener("click", agregarCorredor);
 }
 
 function mostrarDatos(){
@@ -57,6 +57,8 @@ function actualizar(){
     cargarCarrerasenCombo();
     cargarCarrerasenCombo2();
     cargarCarrerasenCombo3();
+    cargarPorcentajeElites();
+    cargarCorredoresEnCombo();
 }
 
 function cargarCarrerasenCombo(){
@@ -94,7 +96,7 @@ function cargarCarrerasenCombo3(){
 }
 
 function agregarPatrocinador(){
-    if(document.getElementById("formPatrocindores").reportValidity()){
+    if(document.getElementById("formPatrocinadores").reportValidity()){
         let nombrePatr = document.getElementById("idNombrePatrocinador").value;
         let rubroPatr = document.getElementById("idPatrocinadorCombo").value;
         let carrerasPatr = [];
@@ -103,7 +105,61 @@ function agregarPatrocinador(){
         }
         if(!sistema.estaPatrocinador(nombrePatr)){
             sistema.agregarPatrocinadorEnLista(new Patrocinador(nombrePatr,rubroPatr,carrerasPatr));
-            document.getElementById("formPatrocindores").reset();
+            document.getElementById("formPatrocinadores").reset();
+        }else{
+            alert("NOMBRE DE PATROCINADOR REPETIDO, ACTUALIZANDO DATOS");
+            for(let i = 0; i < sistema.darListaPatrocinadores().length; i++){
+                if(sistema.darListaPatrocinadores()[i].nombre == nombrePatr){
+                    sistema.darListaPatrocinadores()[i].rubro = rubroPatr;
+                    sistema.darListaPatrocinadores()[i].carreras = carrerasPatr;
+                }
+            }
+            document.getElementById("formPatrocinadores").reset();
         }
+    }
+}
+
+function agregarCorredor(){
+    if (document.getElementById("idFormCorredores").reportValidity()){
+        let nombre = document.getElementById("idNombreCorredor").value;
+        let edad = document.getElementById("idEdadCorredor").value;
+        let vencFichaMedica = document.getElementById("idVencFichaMedica").value;
+        let cedula = document.getElementById("idCedulaCorredor").value;
+        let tipoCorredor = "";
+        let radios = document.getElementsByName("tipodeportista");
+        for(let i = 0; i < radios.length; i++){
+            if(radios[i].checked){
+                tipoCorredor = radios[i].value;
+            }
+        }
+        if (!sistema.estaCorredor(cedula)){
+            sistema.agregarCorredorEnLista(new Corredor(nombre,edad,cedula,vencFichaMedica,tipoCorredor));
+            actualizar();
+            document.getElementById("idFormCorredores").reset();
+        }else{
+            alert("CEDULA REPETIDA");
+            document.getElementById("idCedulaCorredor").value = "";
+        }
+    }
+}
+
+function porcentajeElite(){
+    return (sistema.darElites().length * 100) / sistema.darListaCorredores().length;
+    actualizar();
+}
+
+function cargarPorcentajeElites(){
+    document.getElementById("idPorcentajeElite").innerHTML = porcentajeElite() + "%";
+}
+
+function cargarCorredoresEnCombo(){
+    let combito = document.getElementById("idCorredoresAInscribir");
+    combito.innerHTML = "";
+    let listaCorredores = sistema.darListaCorredores();
+    for (elem of listaCorredores){
+        let nodoC = document.createElement("option");
+        let nodoTextoC = document.createTextNode(elem.nombre + " CI: (" + elem.cedula +")");
+        nodoC.appendChild(nodoTextoC);
+        combito.appendChild(nodoC);
     }
 }

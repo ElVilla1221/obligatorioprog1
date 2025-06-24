@@ -3,6 +3,7 @@ class Sistema{
     constructor(){
         this.listaCarreras = [];
         this.listaPatrocinadores = [];
+        this.listaCorredores = [];
     }
     agregarCarreraEnLista(carrera){
         this.listaCarreras.push(carrera);
@@ -34,6 +35,30 @@ class Sistema{
         }
         return esta;
     }
+    agregarCorredorEnLista(corredor){
+        this.listaCorredores.push(corredor);
+    }
+    darListaCorredores(){
+        return this.listaCorredores;
+    }
+    estaCorredor(cedulaIngresada){
+        let esta = false;
+        for(let elem of this.listaCorredores){
+            if (elem.cedula == cedulaIngresada){
+                esta = true;
+            }
+        }
+        return esta;
+    }
+    darElites(){
+        let list = [];
+        for(let elem of this.listaCorredores){
+            if(elem.esElite()){
+                list.push(elem);
+            }
+        }
+        return list;
+    }
 }
 
 class Carrera{
@@ -55,6 +80,13 @@ class Corredor{
         this.cedula = cedula;
         this.vencimientoFicha = vencFicha;
         this.tipoCorredor = tipoCorredor;
+    }
+    esElite(corredor){
+        let elite = false
+        if(this.tipoCorredor == "Elite"){
+            elite = true
+            return elite;
+        }
     }
 }
 
