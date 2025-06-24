@@ -10,6 +10,7 @@ function inicio(){
     document.getElementById("idDatos").addEventListener("click",mostrarDatos);
     document.getElementById("idEstadisticas").addEventListener("click",mostrarEstadisticas);
     document.getElementById("idBotonAgregarCarrera").addEventListener("click", agregarCarrera);
+    document.getElementById("idBotonAgregarPatrocinador").addEventListener("click",agregarPatrocinador);
     actualizar();
 }
 
@@ -89,5 +90,20 @@ function cargarCarrerasenCombo3(){
         let nodoTextoC = document.createTextNode(elem.nombre);
         nodoC.appendChild(nodoTextoC);
         combito.appendChild(nodoC);
+    }
+}
+
+function agregarPatrocinador(){
+    if(document.getElementById("formPatrocindores").reportValidity()){
+        let nombrePatr = document.getElementById("idNombrePatrocinador").value;
+        let rubroPatr = document.getElementById("idPatrocinadorCombo").value;
+        let carrerasPatr = [];
+        for (let elem of document.getElementById("idListaCarreras").selectedOptions){
+            carrerasPatr.push(elem.value);
+        }
+        if(!sistema.estaPatrocinador(nombrePatr)){
+            sistema.agregarPatrocinadorEnLista(new Patrocinador(nombrePatr,rubroPatr,carrerasPatr));
+            document.getElementById("formPatrocindores").reset();
+        }
     }
 }

@@ -2,6 +2,7 @@
 class Sistema{
     constructor(){
         this.listaCarreras = [];
+        this.listaPatrocinadores = [];
     }
     agregarCarreraEnLista(carrera){
         this.listaCarreras.push(carrera);
@@ -19,15 +20,15 @@ class Sistema{
         return esta;
     }
     agregarPatrocinadorEnLista(patrocinador){
-        this.lista.push(patrocinador);
+        this.listaPatrocinadores.push(patrocinador);
     }
     darListaPatrocinadores(){
-        return this.lista;
+        return this.listaPatrocinadores;
     }
-    estaPatrocinador(nombre){
+    estaPatrocinador(nombrePatrocinador){
         let esta = false;
-        for(let elem of this.lista){
-            if(elem.nombre == nombre){
+        for(let elem of this.listaPatrocinadores){
+            if(elem.nombre == nombrePatrocinador){
                 esta = true;
             }
         }
@@ -65,10 +66,9 @@ class Inscripcion{
 }
 
 class Patrocinador{
-    constructor(nombrePatrocinador, rubro, carrerasPatrocinador){
-        this.nombre = nombrePatrocinador;
+    constructor(nombre, rubro, carreras){
+        this.nombre = nombre;
         this.rubro = rubro;
-        this.carrera = carrerasPatrocinador;
-        this.lista = [];
+        this.carreras = carreras;
     }
 }
