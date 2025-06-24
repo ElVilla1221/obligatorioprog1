@@ -18,6 +18,21 @@ class Sistema{
         }
         return esta;
     }
+    agregarPatrocinadorEnLista(patrocinador){
+        this.lista.push(patrocinador);
+    }
+    darListaPatrocinadores(){
+        return this.lista;
+    }
+    estaPatrocinador(nombre){
+        let esta = false;
+        for(let elem of this.lista){
+            if(elem.nombre == nombre){
+                esta = true;
+            }
+        }
+        return esta;
+    }
 }
 
 class Carrera{
@@ -28,7 +43,7 @@ class Carrera{
         this.cupo = cupo; 
     }
     toString(){
-        return this.nombre + " en " + this.departamento + " el " + this.fecha + " Cupo: " + this.cupo;
+        return "Carrera:" + " " + this.nombre + " en " + this.departamento + " el " + this.fecha + " Cupo: " + this.cupo;
     }
 }
 
@@ -50,9 +65,10 @@ class Inscripcion{
 }
 
 class Patrocinador{
-    constructor(nombrePatrocinador, rubro, carreraPatrocinador){
+    constructor(nombrePatrocinador, rubro, carrerasPatrocinador){
         this.nombre = nombrePatrocinador;
         this.rubro = rubro;
-        this.carrera = carreraPatrocinador;
+        this.carrera = carrerasPatrocinador;
+        this.lista = [];
     }
 }
