@@ -9,7 +9,9 @@ class Sistema{
         this.listaCarreras.push(carrera);
     }
     darListaCarreras(){
-        return this.listaCarreras;
+        let lista = this.listaCarreras
+        lista = lista.sort((a,b) => a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' }));
+        return lista;
     }
     estaCarrera(nombreCarrera){
         let esta = false;
@@ -39,7 +41,9 @@ class Sistema{
         this.listaCorredores.push(corredor);
     }
     darListaCorredores(){
-        return this.listaCorredores;
+        let lista = this.listaCorredores;
+        lista = lista.sort((a,b) => a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' }));
+        return lista;
     }
     estaCorredor(cedulaIngresada){
         let esta = false;

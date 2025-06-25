@@ -57,7 +57,7 @@
         </article>
         <article>
             <h4>Patrocinadores</h4>
-            <form id="formPatrocindores" action="#" method="get">
+            <form id="formPatrocinadores" action="#" method="get">
                 <label for="idNombrePatrocinador" class="alinear">Nombre:</label>
                 <input type="text" name="nomPatrocinador" id="idNombrePatrocinador" required>
                 <label for="idPatrocinadorCombo" class="alinear">Rubro:</label>
@@ -80,7 +80,7 @@
             <h4>Corredores</h4>
             <form id="idFormCorredores" action="#" method="get">
                 <label for="idNombreCorredor" class="alinear">Nombre:</label>
-                <input type="text" name="nomCorredor" id="idNombreCorredor" required>
+                <input type="text" name="nomCorredor" id="idNombreCorredor" pattern="[A-Za-z]+" title="Ingrese solo letras" required>
                 <label for="idEdadCorredor" class="alinear">Edad:</label>
                 <input type="number" name="edadCorredor" id="idEdadCorredor" min="18" required>
                 <label for="idCedulaCorredor" class="alinear">Cédula:</label>
@@ -89,12 +89,12 @@
                 <input type="date" name="vencFichaMed" id="idVencFichaMedica" required>
                 <br>
                 <label>Tipo de corredor:</label>
-                <input type="radio" name="tipodeportista" id="idElite">
+                <input type="radio" name="tipodeportista" id="idElite" value="Elite">
                 <label for="idElite">Deportista de elite</label>
-                <input type="radio" name="tipodeportista" id="idComun" checked>
+                <input type="radio" name="tipodeportista" id="idComun" value="comun" checked>
                 <label for="idComun">Deportista común</label>
                 <br>
-                <input type="button" value="Agregar Corredor">
+                <input type="button" value="Agregar Corredor" id="idBotonAgregarCorredor">
             </form>
         </article>
         <article>
@@ -105,7 +105,7 @@
                 <label for="idCarrerasInscribir" class="alinear">Carreras:</label>
                 <select name="carrerasInscr" class="comboAnchos" id="idCarrerasInscribir"></select>
                 <br>
-                <input type="button" value="Inscribir">
+                <input type="button" value="Inscribir" id="idBotonInscribir">
             </form>
         </article>
     </section>

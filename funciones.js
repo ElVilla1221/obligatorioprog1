@@ -12,6 +12,7 @@ function inicio(){
     document.getElementById("idBotonAgregarCarrera").addEventListener("click", agregarCarrera);
     document.getElementById("idBotonAgregarPatrocinador").addEventListener("click",agregarPatrocinador);
     document.getElementById("idBotonAgregarCorredor").addEventListener("click", agregarCorredor);
+    document.getElementById("idBotonInscribir").addEventListener("click", agregarInscripcion);
 }
 
 function mostrarDatos(){
@@ -144,7 +145,8 @@ function agregarCorredor(){
 }
 
 function porcentajeElite(){
-    return (sistema.darElites().length * 100) / sistema.darListaCorredores().length;
+    let porcent = Math.round((sistema.darElites().length * 100) / sistema.darListaCorredores().length*100) / 100;
+    return porcent;
     actualizar();
 }
 
@@ -162,4 +164,8 @@ function cargarCorredoresEnCombo(){
         nodoC.appendChild(nodoTextoC);
         combito.appendChild(nodoC);
     }
+}
+
+function agregarInscripcion(){
+    let 
 }
