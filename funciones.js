@@ -42,7 +42,7 @@ function agregarCarrera(){
         let nombre = document.getElementById("idNombreCarrera").value;
         let departamento = document.getElementById("idDepartamentoCombo").value;
         let fecha = document.getElementById("idFecha").value;
-        let cupo = document.getElementById("idIngresarCupo").value;
+        let cupo = parseInt(document.getElementById("idIngresarCupo").value);
         if (!sistema.estaCarrera(nombre)){
             sistema.agregarCarreraEnLista(new Carrera(nombre,departamento,fecha,cupo));
             actualizar();
@@ -167,5 +167,46 @@ function cargarCorredoresEnCombo(){
 }
 
 function agregarInscripcion(){
-    let 
+    let numero = 0;
+    let corredor = document.getElementById("idCorredoresAInscribir").value;
+    corredor = corredor.split("(")[1].split(")")[0];
+    let carrera = document.getElementById("idCarrerasInscribir").value;
+    for(let elem of sistema.darListaCorredores()){
+        if(elem.cedula == corredor.toString()){
+            corredor = elem;
+        }
+    }
+    for(let elem of sistema.darListaCarreras()){
+        if(elem.nombre == carrera){
+            carrera = elem;
+        }
+    }
+    let cupo = carrera.cupo;
+    let vencFicha = new Date(corredor.vencimientoFicha);
+    let fechaCarrera = new Date(carrera.fecha);
+    if(vencFicha < fechaCarrera){
+        alert("-FICHA MEDICA VENCIDA PARA LA FECHA DE LA CARRERA-")
+        document.getElementById("formInscripciones").reset();
+    }else{
+        if(cupo <= 0){
+            alert("-CARRERA SIN CUPO-")
+            document.getElementById("formInscripciones").reset();
+        }else{
+            sistema.agregarInscripcionEnLista(new Inscripcion(corredor, carrera));
+            for(let elem of sistema.darListaInscripciones()){
+                if(elem.carreras.nombre == carrera.nombre){
+                    numero++;
+                }
+            }
+            alert("Número: " + numero + "\n" + "Nombre: " + corredor.nombre + " " + corredor.edad + " años, CI: " + corredor.cedula + " Ficha Médica " + corredor.vencimientoFicha 
+            + "\n" + corredor.tipoCorredor + "\nCarrera: " + carrera.nombre + " en " + carrera.departamento + " el " + carrera.fecha
+            + " Cupo: " + carrera.cupo)
+            document.getElementById("formInscripciones").reset();
+            for(let elem of sistema.darListaCarreras()){
+                if(elem.nombre == carrera.nombre){
+                elem.cupo--;
+                }
+            }
+        }
+    }
 }

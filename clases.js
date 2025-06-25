@@ -4,6 +4,7 @@ class Sistema{
         this.listaCarreras = [];
         this.listaPatrocinadores = [];
         this.listaCorredores = [];
+        this.listaInscripciones = [];
     }
     agregarCarreraEnLista(carrera){
         this.listaCarreras.push(carrera);
@@ -63,6 +64,12 @@ class Sistema{
         }
         return list;
     }
+    agregarInscripcionEnLista(inscripcion){
+        this.listaInscripciones.push(inscripcion);
+    }
+    darListaInscripciones(){
+        return this.listaInscripciones;
+    }
 }
 
 class Carrera{
@@ -71,9 +78,6 @@ class Carrera{
         this.departamento = departamento;
         this.fecha = fecha;
         this.cupo = cupo; 
-    }
-    toString(){
-        return "Carrera:" + " " + this.nombre + " en " + this.departamento + " el " + this.fecha + " Cupo: " + this.cupo;
     }
 }
 
