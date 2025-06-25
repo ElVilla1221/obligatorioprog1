@@ -77,17 +77,27 @@ class Carrera{
         this.nombre = nombre;
         this.departamento = departamento;
         this.fecha = fecha;
-        this.cupo = cupo; 
+        this.cupo = cupo;
+        this.listaCorredoresDeLaCarrera = []; 
+    }
+    agregarCorredorALaCarrera(corredor){
+        this.listaCorredoresDeLaCarrera.push(corredor);
+    }
+    darListaCorredoresDeLaCarrera(){
+        let lista = this.listaCorredoresDeLaCarrera;
+        lista = lista.sort((a,b) => a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' }));
+        return lista;
     }
 }
 
 class Corredor{
-    constructor(nombre,edad,cedula,vencFicha,tipoCorredor){
+    constructor(nombre,edad,cedula,vencFicha,tipoCorredor,numero){
         this.nombre = nombre;
         this.edad = edad;
         this.cedula = cedula;
         this.vencimientoFicha = vencFicha;
         this.tipoCorredor = tipoCorredor;
+        this.numero = numero;
     }
     esElite(corredor){
         let elite = false

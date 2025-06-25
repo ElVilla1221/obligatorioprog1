@@ -11,7 +11,7 @@ function inicio(){
     document.getElementById("idEstadisticas").addEventListener("click",mostrarEstadisticas);
     document.getElementById("idBotonAgregarCarrera").addEventListener("click", agregarCarrera);
     document.getElementById("idBotonAgregarPatrocinador").addEventListener("click",agregarPatrocinador);
-    document.getElementById("idBotonAgregarCorredor").addEventListener("click", agregarCorredor);
+    document.getElementById("idBotonAgregarCorredor").addEventListener("click", agregarCorredorALaLista);
     document.getElementById("idBotonInscribir").addEventListener("click", agregarInscripcion);
 }
 
@@ -120,7 +120,7 @@ function agregarPatrocinador(){
     }
 }
 
-function agregarCorredor(){
+function agregarCorredorALaLista(){
     if (document.getElementById("idFormCorredores").reportValidity()){
         let nombre = document.getElementById("idNombreCorredor").value;
         let edad = document.getElementById("idEdadCorredor").value;
@@ -134,7 +134,7 @@ function agregarCorredor(){
             }
         }
         if (!sistema.estaCorredor(cedula)){
-            sistema.agregarCorredorEnLista(new Corredor(nombre,edad,cedula,vencFichaMedica,tipoCorredor));
+            sistema.agregarCorredorEnLista(new Corredor(nombre,edad,cedula,vencFichaMedica,tipoCorredor,null));
             actualizar();
             document.getElementById("idFormCorredores").reset();
         }else{
@@ -167,6 +167,7 @@ function cargarCorredoresEnCombo(){
 }
 
 function agregarInscripcion(){
+    let ok = true;
     let numero = 0;
     let corredor = document.getElementById("idCorredoresAInscribir").value;
     corredor = corredor.split("(")[1].split(")")[0];
@@ -184,6 +185,12 @@ function agregarInscripcion(){
     let cupo = carrera.cupo;
     let vencFicha = new Date(corredor.vencimientoFicha);
     let fechaCarrera = new Date(carrera.fecha);
+    let patrocinador = [];
+    for(let elem of sistema.darListaPatrocinadores()){
+        if(elem.carreras.includes(carrera.nombre)){
+            patrocinador.push(elem.nombre + " (" + elem.rubro + ") ");
+        }
+    }
     if(vencFicha < fechaCarrera){
         alert("-FICHA MEDICA VENCIDA PARA LA FECHA DE LA CARRERA-")
         document.getElementById("formInscripciones").reset();
@@ -192,6 +199,14 @@ function agregarInscripcion(){
             alert("-CARRERA SIN CUPO-")
             document.getElementById("formInscripciones").reset();
         }else{
+            for(let elem of sistema.darListaInscripciones()){
+                if(elem.corredores.cedula == corredor.cedula && elem.carreras.nombre == carrera.nombre){
+                    alert("EL CORREDOR YA FUE INSCRIPTO A LA CARRERA");
+                    document.getElementById("formInscripciones").reset();
+                    ok = false;
+                }
+            }
+            if(ok){
             sistema.agregarInscripcionEnLista(new Inscripcion(corredor, carrera));
             for(let elem of sistema.darListaInscripciones()){
                 if(elem.carreras.nombre == carrera.nombre){
@@ -200,12 +215,13 @@ function agregarInscripcion(){
             }
             alert("Número: " + numero + "\n" + "Nombre: " + corredor.nombre + " " + corredor.edad + " años, CI: " + corredor.cedula + " Ficha Médica " + corredor.vencimientoFicha 
             + "\n" + corredor.tipoCorredor + "\nCarrera: " + carrera.nombre + " en " + carrera.departamento + " el " + carrera.fecha
-            + " Cupo: " + carrera.cupo)
+            + " Cupo: " + carrera.cupo + "\n" + patrocinador.toString());
             document.getElementById("formInscripciones").reset();
             for(let elem of sistema.darListaCarreras()){
                 if(elem.nombre == carrera.nombre){
                 elem.cupo--;
                 }
+            }
             }
         }
     }
