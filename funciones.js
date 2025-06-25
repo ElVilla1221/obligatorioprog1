@@ -216,6 +216,7 @@ function agregarInscripcion(){
             alert("Número: " + numero + "\n" + "Nombre: " + corredor.nombre + " " + corredor.edad + " años, CI: " + corredor.cedula + " Ficha Médica " + corredor.vencimientoFicha 
             + "\n" + corredor.tipoCorredor + "\nCarrera: " + carrera.nombre + " en " + carrera.departamento + " el " + carrera.fecha
             + " Cupo: " + carrera.cupo + "\n" + patrocinador.toString());
+            generarPDF(numero, corredor, carrera, patrocinador);
             document.getElementById("formInscripciones").reset();
             for(let elem of sistema.darListaCarreras()){
                 if(elem.nombre == carrera.nombre){
@@ -225,4 +226,18 @@ function agregarInscripcion(){
             }
         }
     }
+}
+function generarPDF(numero, corredor, carrera, patrocinador){
+    let {jsPDF} = window.jspdf;
+    let doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text("Comprobante de inscripción", 10, 20);
+    doc.setFontSize(12);
+    doc.text("Número: " + numero, 10, 40);
+    doc.text("Nombre: " + corredor.nombre + " " + corredor.edad + " años, CI: " + corredor.cedula + " Ficha médica: " + corredor.vencimientoFicha, 10, 50);
+    doc.text(corredor.tipoCorredor, 10, 60);
+    doc.text("Carrera: " + carrera.nombre + " en " + carrera.departamento + " el " + carrera.fecha + " Cupo: " + carrera.cupo, 10, 70);
+    doc.text(patrocinador.toString(), 10, 80);
+
+    doc.save("comprobante-inscripcion.pdf");
 }
