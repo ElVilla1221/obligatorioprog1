@@ -43,5 +43,15 @@ footer {
 .espacio{
     height: 400px;
 }
-
-    
+input[type="date"]{
+    width:160px;
+}
+input[type="number"]{
+    width: 162px;
+}
+#idBotonAgregarCarrera{
+    width: 157px;
+}
+#idConsultaNombreCarrera{
+    width: 150px;
+}

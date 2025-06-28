@@ -78,40 +78,32 @@ class Carrera{
         this.departamento = departamento;
         this.fecha = fecha;
         this.cupo = cupo;
-        this.listaCorredoresDeLaCarrera = []; 
-    }
-    agregarCorredorALaCarrera(corredor){
-        this.listaCorredoresDeLaCarrera.push(corredor);
-    }
-    darListaCorredoresDeLaCarrera(){
-        let lista = this.listaCorredoresDeLaCarrera;
-        lista = lista.sort((a,b) => a.nombre.localeCompare(b.nombre, 'es', { sensitivity: 'base' }));
-        return lista;
-    }
+    }   
 }
 
 class Corredor{
-    constructor(nombre,edad,cedula,vencFicha,tipoCorredor,numero){
+    constructor(nombre,edad,cedula,vencFicha,tipoCorredor){
         this.nombre = nombre;
         this.edad = edad;
         this.cedula = cedula;
         this.vencimientoFicha = vencFicha;
         this.tipoCorredor = tipoCorredor;
-        this.numero = numero;
     }
-    esElite(corredor){
+    esElite(){
         let elite = false
-        if(this.tipoCorredor == "Elite"){
+        if(this.tipoCorredor == "Élite"){
             elite = true
             return elite;
         }
+        return elite;
     }
 }
 
 class Inscripcion{
-    constructor(corredores, carreras){
+    constructor(corredores, carreras, numero){
         this.corredores = corredores;
         this.carreras = carreras; 
+        this.numero = numero;
     }
 }
 

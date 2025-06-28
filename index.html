@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="estilos.css">
-    <script src="clases.js"></script>
-    <script src="funciones.js"></script>
+    <link rel="stylesheet" href="CSS/estilos.css">
+    <script src="JS/clases.js"></script>
+    <script src="JS/funciones.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <title>Sitio de corredores</title>
 </head>
@@ -81,16 +81,16 @@
             <h4>Corredores</h4>
             <form id="idFormCorredores" action="#" method="get">
                 <label for="idNombreCorredor" class="alinear">Nombre:</label>
-                <input type="text" name="nomCorredor" id="idNombreCorredor" pattern="[A-Za-z]+" title="Ingrese solo letras" required>
+                <input type="text" name="nomCorredor" id="idNombreCorredor" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Ingrese solo letras" required>
                 <label for="idEdadCorredor" class="alinear">Edad:</label>
                 <input type="number" name="edadCorredor" id="idEdadCorredor" min="18" required>
                 <label for="idCedulaCorredor" class="alinear">Cédula:</label>
-                <input type="text" name="cedCorredor" id="idCedulaCorredor" required>
+                <input type="number" name="cedCorredor" id="idCedulaCorredor" required>
                 <label for="idVencFichaMedica" class="alinear">Fecha de vencimiento de ficha médica:</label>
                 <input type="date" name="vencFichaMed" id="idVencFichaMedica" required>
                 <br>
                 <label>Tipo de corredor:</label>
-                <input type="radio" name="tipodeportista" id="idElite" value="Elite">
+                <input type="radio" name="tipodeportista" id="idElite" value="Élite">
                 <label for="idElite">Deportista de elite</label>
                 <input type="radio" name="tipodeportista" id="idComun" value="Común" checked>
                 <label for="idComun">Deportista común</label>
@@ -114,7 +114,7 @@
         <h3>Estadísticas</h3>
         <article>
         <h4>Datos generales</h4>
-                <p>Promedio de inscriptos por carrera:<span id="idPromedioInscriptos"> sin datos</span></p>
+                <p>Promedio de inscriptos por carrera: <span id="idPromedioInscriptos"> sin datos</span></p>
                     <p>Carrera/s con más inscriptos:</p>
                 <ul id="idCarreMasInscriptos">
                     <li>sin datos</li>
@@ -128,12 +128,12 @@
         <article>
             <h4>Consulta inscriptos</h4>
             <label for="idNombreCarrera" class="alinear">Carrera:</label>
-            <select name="numeroCarrera" class="comboAnchos" id="idConsultaNombreCarrera"></select>
+            <select name="queCarrera" id="idConsultaNombreCarrera"></select>
             <br>
             <label>Ordenar por:</label>
-            <input type="radio" name="ordenarCarrera" id="idOrdenarNombre">
+            <input type="radio" name="ordenarCarrera" id="idOrdenarNombre" value="nombre">
             <label for="idOrdenarNombre">Nombre</label>
-            <input type="radio" name="ordenarCarrera" id="idOrdenarNumero" checked>
+            <input type="radio" name="ordenarCarrera" id="idOrdenarNumero" value="numero" checked>
             <label for="idOrdenarNumero">Número</label>
 
         <table id="idTablaInscriptos">
@@ -148,7 +148,7 @@
                 </tr>
             </thead>
             <tbody id="idBodyTablaInscriptos"></tbody>
-        </table>
+        </table>                                                    
     </article>
     <article>
         <h4>Visualizar Mapa:</h4>
