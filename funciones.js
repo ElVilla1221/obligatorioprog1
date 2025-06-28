@@ -18,6 +18,10 @@ function inicio(){
     for(let i = 0; i < radiosTabla.length; i++){
         radiosTabla[i].addEventListener("change",cargarTabla);
     }
+    let radiosMapa = document.getElementsByName("mapaCarrera");
+    for(let i = 0; i < radiosMapa.length; i++){
+        radiosMapa[i].addEventListener("change",actualizar);
+    }
     actualizar();
 }
 
@@ -31,6 +35,8 @@ function actualizar(){
     cargarCarreraConMasInscriptosEnLista();
     cargarCarrerasSinInscriptos();
     cargarTabla();
+    google.charts.load('current', { packages: ['geochart'] });
+    google.charts.setOnLoadCallback(mostrarMapa);
 }
 
 function mostrarDatos(){
@@ -53,6 +59,8 @@ function mostrarEstadisticas(){
     boton.style.backgroundColor = "rgb(43,145,165)";
     let botonDatos = document.getElementById("idDatos");
     botonDatos.style.backgroundColor = "";
+    google.charts.load('current', { packages: ['geochart'] });
+    google.charts.setOnLoadCallback(mostrarMapa);
 }
 
 function agregarCarrera(){
@@ -396,6 +404,9 @@ function cargarTabla(){
                 let tdNumero = document.createElement("td");
                 tdNumero.textContent = elem.numero;
                 tr.appendChild(tdNumero);
+                if(elem.corredores.tipoCorredor == "Élite"){
+                    tr.style.backgroundColor = "red";
+                }
                 cuerpo.appendChild(tr);
             }
         }
@@ -417,8 +428,68 @@ function cargarTabla(){
                 let tdNumero = document.createElement("td");
                 tdNumero.textContent = elem.numero;
                 tr.appendChild(tdNumero);
+                if(elem.corredores.tipoCorredor == "Élite"){
+                    tr.style.backgroundColor = "red";
+                }
                 cuerpo.appendChild(tr);
             }
         }
     }
+}
+
+function mostrarMapa(){
+    let mapa = new google.visualization.GeoChart(document.getElementById("idMapa"));
+    let conf = {region: 'UY', resolution: 'provinces', colorAxis: {colors: ["rgb(218,233,255)", "rgb(0,0,85)"]}}
+    let radios = document.getElementsByName("mapaCarrera");
+    let datos;
+    for(let i = 0; i < radios.length; i++){
+        if(radios[i].checked && radios[i].value == "carrera"){
+            datos = google.visualization.arrayToDataTable([
+            ["Departamento", "Cantidad"],
+            ["Artigas", sistema.carrerasPorDepartamento("Artigas")],
+            ["Canelones", sistema.carrerasPorDepartamento("Canelones")],	
+            ["Cerro Largo", sistema.carrerasPorDepartamento("Cerro Largo")],	
+            ["Colonia", sistema.carrerasPorDepartamento("Colonia")],	
+            ["Durazno", sistema.carrerasPorDepartamento("Durazno")],	
+            ["Flores", sistema.carrerasPorDepartamento("Flores")],	
+            ["Florida", sistema.carrerasPorDepartamento("Florida")],	
+            ["Lavalleja", sistema.carrerasPorDepartamento("Lavalleja")],	
+            ["Maldonado", sistema.carrerasPorDepartamento("Maldonado")],	
+            ["Montevideo", sistema.carrerasPorDepartamento("Montevideo")],	
+            ["Paysandú", sistema.carrerasPorDepartamento("Paysandú")],	
+            ["Río Negro",sistema.carrerasPorDepartamento("Río Negro")],	
+            ["Rivera", sistema.carrerasPorDepartamento("Rivera")],	
+            ["Rocha", sistema.carrerasPorDepartamento("Rocha")],	
+            ["Salto", sistema.carrerasPorDepartamento("Salto")],	
+            ["San José",sistema.carrerasPorDepartamento("San José")],	
+            ["Soriano", sistema.carrerasPorDepartamento("Soriano")],
+            ["Tacuarembó", sistema.carrerasPorDepartamento("Tacuarembó")],	
+            ["Treinta y Tres", sistema.carrerasPorDepartamento("Treinta y Tres")]
+            ]);
+        }else if(radios[i].checked && radios[i].value == "inscriptos"){
+            datos = google.visualization.arrayToDataTable([
+            ["Departamento", "Cantidad"],
+            ["Artigas", sistema.inscriptosPorDepartamento("Artigas")],
+            ["Canelones", sistema.inscriptosPorDepartamento("Canelones")],	
+            ["Cerro Largo", sistema.inscriptosPorDepartamento("Cerro Largo")],	
+            ["Colonia", sistema.inscriptosPorDepartamento("Colonia")],	
+            ["Durazno", sistema.inscriptosPorDepartamento("Durazno")],	
+            ["Flores", sistema.inscriptosPorDepartamento("Flores")],	
+            ["Florida", sistema.inscriptosPorDepartamento("Florida")],	
+            ["Lavalleja", sistema.inscriptosPorDepartamento("Lavalleja")],	
+            ["Maldonado", sistema.inscriptosPorDepartamento("Maldonado")],	
+            ["Montevideo", sistema.inscriptosPorDepartamento("Montevideo")],	
+            ["Paysandú", sistema.inscriptosPorDepartamento("Paysandú")],	
+            ["Río Negro",sistema.inscriptosPorDepartamento("Río Negro")],	
+            ["Rivera", sistema.inscriptosPorDepartamento("Rivera")],	
+            ["Rocha", sistema.inscriptosPorDepartamento("Rocha")],	
+            ["Salto", sistema.inscriptosPorDepartamento("Salto")],	
+            ["San José",sistema.inscriptosPorDepartamento("San José")],	
+            ["Soriano", sistema.inscriptosPorDepartamento("Soriano")],
+            ["Tacuarembó", sistema.inscriptosPorDepartamento("Tacuarembó")],	
+            ["Treinta y Tres", sistema.inscriptosPorDepartamento("Treinta y Tres")]
+            ]);
+        }
+    }
+    mapa.draw(datos, conf);
 }

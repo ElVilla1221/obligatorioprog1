@@ -40,9 +40,6 @@ footer {
 #idTablaInscriptos,th,td{
     border: 1px solid black;
 }
-.espacio{
-    height: 400px;
-}
 input[type="date"]{
     width:160px;
 }

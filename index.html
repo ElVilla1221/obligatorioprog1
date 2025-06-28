@@ -8,6 +8,7 @@
     <script src="JS/clases.js"></script>
     <script src="JS/funciones.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
     <title>Sitio de corredores</title>
 </head>
 <body>
@@ -131,9 +132,9 @@
             <select name="queCarrera" id="idConsultaNombreCarrera"></select>
             <br>
             <label>Ordenar por:</label>
-            <input type="radio" name="ordenarCarrera" id="idOrdenarNombre" value="nombre">
+            <input type="radio" name="ordenarCarrera" id="idOrdenarNombre" value="nombre" checked>
             <label for="idOrdenarNombre">Nombre</label>
-            <input type="radio" name="ordenarCarrera" id="idOrdenarNumero" value="numero" checked>
+            <input type="radio" name="ordenarCarrera" id="idOrdenarNumero" value="numero">
             <label for="idOrdenarNumero">Número</label>
 
         <table id="idTablaInscriptos">
@@ -152,11 +153,11 @@
     </article>
     <article>
         <h4>Visualizar Mapa:</h4>
-        <input type="radio" name="mapaCarrera" id="idMapaCarrera" checked>
+        <input type="radio" name="mapaCarrera" id="idMapaCarrera" value="carrera" checked>
         <label for="idMapaCarrera">Por Carreras</label>
-        <input type="radio" name="mapaCarrera" id="idMapaInscripciones">
+        <input type="radio" name="mapaCarrera" id="idMapaInscripciones" value="inscriptos">
         <label  for="idMapaInscripciones">Por Inscripciones</label>
-        <div class="espacio"></div>
+        <div id="idMapa" style="width: 100%; height: 600px;"></div>
     </article>
     </section>
     <footer>

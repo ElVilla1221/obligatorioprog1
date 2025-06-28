@@ -70,6 +70,26 @@ class Sistema{
     darListaInscripciones(){
         return this.listaInscripciones;
     }
+    carrerasPorDepartamento(departamento){
+        let cant = 0;
+        let listaCarreras = sistema.darListaCarreras();
+        for(let elem of listaCarreras){
+            if(elem.departamento == departamento){
+                cant++;
+            }
+        }
+        return cant;
+    }
+    inscriptosPorDepartamento(departamento){
+        let cant = 0;
+        let listaInsc = sistema.darListaInscripciones();
+        for(let elem of listaInsc){
+            if(elem.carreras.departamento == departamento){
+                cant++;
+            }
+        }
+        return cant;
+    }
 }
 
 class Carrera{
